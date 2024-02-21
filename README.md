@@ -1,14 +1,12 @@
 
-# vision-camera-ocr
+# vision-camera-ocr-chinese
 
-A [VisionCamera](https://github.com/mrousavy/react-native-vision-camera) Frame Processor Plugin to preform text detection on images using [**MLKit Vision** Text Recognition](https://developers.google.com/ml-kit/vision/text-recognition).
-
-<img style='width:200px;' src="docs/demo.gif">
+Updated to use TextRecognition that supports Chinese.
 
 ## Installation
 
 ```sh
-yarn add vision-camera-ocr
+npm install @chuvincent/vision-camera-ocr-chinese
 cd ios && pod install
 ```
 
@@ -25,7 +23,7 @@ module.exports = {
 ## Usage
 
 ```js
-import {scanOCR} from 'vision-camera-ocr';
+import {scanOCR} from '@chuvincent/vision-camera-ocr-chinese';
 
 // ...
 const frameProcessor = useFrameProcessor((frame) => {
@@ -33,6 +31,11 @@ const frameProcessor = useFrameProcessor((frame) => {
   const scannedOcr = scanOCR(frame);
 }, []);
 ```
+
+# Publish to NPM
+`npm run prepare`
+ `npm run release`
+
 
 ## Data
 
