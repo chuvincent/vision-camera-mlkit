@@ -1,14 +1,14 @@
 import Vision
 import AVFoundation
 import MLKitVision
-import MLKitTextRecognition
+import MLKitTextRecognitionChinese
 import CoreImage
 import UIKit
 
 @objc(OCRFrameProcessorPlugin)
 public class OCRFrameProcessorPlugin: FrameProcessorPlugin {
     
-    private static let textRecognizer = TextRecognizer.textRecognizer(options: TextRecognizerOptions.init())
+    private static let textRecognizer = TextRecognizer.textRecognizer(options: ChineseTextRecognizerOptions.init())
     
     private static func getBlockArray(_ blocks: [TextBlock]) -> [[String: Any]] {
         
