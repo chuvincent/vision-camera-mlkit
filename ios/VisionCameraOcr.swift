@@ -4,6 +4,45 @@ import MLKitVision
 import MLKitTextRecognitionChinese
 import CoreImage
 import UIKit
+import Vision
+import AVFoundation
+import MLKitImageLabeling
+import MLKitVision
+import MLKitTextRecognitionChinese
+import CoreImage
+import UIKit
+
+@objc(ImageLabelerFrameProcessorPlugin)
+public class ImageLabelerFrameProcessorPlugin: FrameProcessorPlugin {
+    
+    private static let labeler: ImageLabeler = {
+        let options = ImageLabelerOptions()
+        return ImageLabeler.imageLabeler(options: options)
+    }()
+    
+    @objc public static func labelImage(_ frame: Frame, withArguments arguments: [Any]?) -> Any? {
+        let visionImage = VisionImage(buffer: frame.buffer)
+        visionImage.orientation = frame.orientation // TODO: Check if mirrored
+        
+        var results: [[String: Any]] = []
+        
+        do {
+            let labels = try labeler.results(in: visionImage)
+            results = labels.map { label in
+                return [
+                    "label": label.text,
+                    "confidence": label.confidence
+                ]
+            }
+        } catch let error {
+            print("Failed to label image with error: \(error.localizedDescription)")
+            return nil
+        }
+        
+        return results
+    }
+}
+
 
 @objc(OCRFrameProcessorPlugin)
 public class OCRFrameProcessorPlugin: FrameProcessorPlugin {
