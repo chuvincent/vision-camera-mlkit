@@ -20,14 +20,15 @@ public class ImageLabelerFrameProcessorPlugin: FrameProcessorPlugin {
         return ImageLabeler.imageLabeler(options: options)
     }()
     
-    @objc public static func labelImage(_ frame: Frame, withArguments arguments: [Any]?) -> Any? {
+    public override func callback(_ frame: Frame, withArguments arguments: [AnyHashable: Any]?) -> Any? {
+   // @objc public static func labelImage(_ frame: Frame, withArguments arguments: [Any]?) -> Any? {
         let visionImage = VisionImage(buffer: frame.buffer)
         visionImage.orientation = frame.orientation // TODO: Check if mirrored
         
         var results: [[String: Any]] = []
         
         do {
-            let labels = try labeler.results(in: visionImage)
+            let labels = try ImageLabelerFrameProcessorPlugin.labeler.results(in: visionImage)
             results = labels.map { label in
                 return [
                     "label": label.text,

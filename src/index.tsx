@@ -80,7 +80,7 @@ export function scanOCR(frame: Frame): OCRFrame {
 /**
  * Image Labeler
  */
-const plugin2 = VisionCameraProxy.initFrameProcessorPlugin('scanOCR');
+const pluginLabelImage = VisionCameraProxy.initFrameProcessorPlugin('labelImage');
 
 interface ImageLabel {
   /**
@@ -100,6 +100,10 @@ interface ImageLabel {
  */
 export function labelImage(frame: Frame): ImageLabel[] {
   'worklet';
-  // @ts-expect-error Frame Processors are not typed.
-  return __labelImage(frame);
+  if (pluginLabelImage == null) {
+    throw new Error(
+      'Failed to load Frame Processor Plugin "labelImage"! Please check your dependencies and make sure that the plugin is linked correctly.'
+    );
+  }
+  return pluginLabelImage.call(frame) as any;
 }
