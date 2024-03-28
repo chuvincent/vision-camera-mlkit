@@ -1,6 +1,6 @@
 {
   "name": "@chuvincent/vision-camera-ocr-chinese",
-  "version": "2.6.0",
+  "version": "2.5.2",
   "private": false,
   "description": "VisionCamera Frame Processor Plugin to provide OCR support.  Based on ismaelmoreiraa's fixes and to support Chinese characters",
   "main": "lib/commonjs/index",
