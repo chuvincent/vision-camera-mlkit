@@ -22,23 +22,52 @@ public class ImageLabelerFrameProcessorPlugin: FrameProcessorPlugin {
     
     public override func callback(_ frame: Frame, withArguments arguments: [AnyHashable: Any]?) -> Any? {
    // @objc public static func labelImage(_ frame: Frame, withArguments arguments: [Any]?) -> Any? {
-        let visionImage = VisionImage(buffer: frame.buffer)
-        visionImage.orientation = frame.orientation // TODO: Check if mirrored
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(frame.buffer) else {
+          print("Failed to get image buffer from sample buffer.")
+          return nil
+        }
+
+        let ciImage = CIImage(cvPixelBuffer: imageBuffer)
+        
+        guard let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent) else {
+            print("Failed to create bitmap from image.")
+            return nil
+        }
+        
+        let image = UIImage(cgImage: cgImage)
+       
+        let visionImage = VisionImage(image: image)
+        
+        // TODO: Get camera orientation state
+        visionImage.orientation = .up
         
         var results: [[String: Any]] = []
         
+        // do {
+        //     let labels = try ImageLabelerFrameProcessorPlugin.labeler.results(in: visionImage)
+        //     results = labels.map { label in
+        //         return [
+        //             "label": label.text,
+        //             "confidence": label.confidence
+        //         ]
+        //     }
+        // } catch let error {
+        //     print("Failed to label image with error: \(error.localizedDescription)")
+        //     return nil
+        // }
+
         do {
             let labels = try ImageLabelerFrameProcessorPlugin.labeler.results(in: visionImage)
-            results = labels.map { label in
-                return [
+            for label in labels {
+                results.append([
                     "label": label.text,
-                    "confidence": label.confidence
-                ]
+                    "confidence": label.confidence,
+                ])
             }
         } catch let error {
             print("Failed to label image with error: \(error.localizedDescription)")
             return nil
-        }
+        }        
         
         return results
     }
