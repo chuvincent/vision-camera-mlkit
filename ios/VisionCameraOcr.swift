@@ -55,21 +55,20 @@ public class ImageLabelerFrameProcessorPlugin: FrameProcessorPlugin {
         //     print("Failed to label image with error: \(error.localizedDescription)")
         //     return nil
         // }
+        
+        var labels: [ImageLabel]
 
         do {
-            let labels = try ImageLabelerFrameProcessorPlugin.labeler.results(in: visionImage)
-            for label in labels {
-                results.append([
-                    "label": label.text,
-                    "confidence": label.confidence,
-                ])
-            }
+            labels = try ImageLabelerFrameProcessorPlugin.labeler.results(in: visionImage)
         } catch let error {
             print("Failed to label image with error: \(error.localizedDescription)")
             return nil
         }        
         
-        return results
+        return [
+            "Text": labels.first?.text,
+            "Confidence": labels.first?.confidence
+        ]
     }
 }
 
