@@ -1,8 +1,8 @@
 {
-  "name": "@chuvincent/vision-camera-ocr-chinese",
+  "name": "@chuvincent/vision-camera-mlkit",
   "version": "2.6.0",
   "private": false,
-  "description": "VisionCamera Frame Processor Plugin to provide OCR support.  Based on ismaelmoreiraa's fixes and to support Chinese characters",
+  "description": "VisionCamera Frame Processor Plugin to provide general bridge to MLKit.  Based on ismaelmoreiraa's fixes for OCR",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -39,7 +39,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:chuvincent/vision-camera-ocr.git"
+    "url": "git@github.com:chuvincent/vision-camera-mlkit.git"
   },
   "author": "Vincent Chu <chuvincent@gmail.com> (https://github.com/chuvincent)",
   "license": "MIT",

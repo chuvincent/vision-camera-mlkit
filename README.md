@@ -1,12 +1,12 @@
 
-# vision-camera-ocr-chinese
+# vision-camera-mlkit
 
-Updated to use TextRecognition that supports Chinese.
+Supports general bridge between Vision Camera and Google ML Kit
 
 ## Installation
 
 ```sh
-npm install @chuvincent/vision-camera-ocr-chinese
+npm install @chuvincent/vision-camera-mlkit
 cd ios && pod install
 ```
 
@@ -23,7 +23,7 @@ module.exports = {
 ## Usage
 
 ```js
-import {scanOCR} from '@chuvincent/vision-camera-ocr-chinese';
+import {scanOCR} from '@chuvincent/vision-camera-mlkit';
 
 // ...
 const frameProcessor = useFrameProcessor((frame) => {

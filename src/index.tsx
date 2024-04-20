@@ -86,11 +86,11 @@ interface ImageLabel {
   /**
    * A label describing the image, in english.
    */
-  label: string;
+  Text: string;
   /**
    * A floating point number from 0 to 1, describing the confidence (percentage).
    */
-  confidence: number;
+  Confidence: number;
 }
 
 /**
