@@ -1,6 +1,6 @@
 {
   "name": "@chuvincent/vision-camera-mlkit",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "private": false,
   "description": "VisionCamera Frame Processor Plugin to provide general bridge to MLKit.  Based on ismaelmoreiraa's fixes for OCR",
   "main": "lib/commonjs/index",
